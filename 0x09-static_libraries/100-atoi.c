@@ -1,45 +1,29 @@
-#include "main.h"
-
+#include "holberton.h"
 /**
- * _isdigit - checks if character is a digit
- * @s: the character to check
- *
- * Return: 1 if digit, 0 otherwise
- */
-int _isdigit(char s)
-{
-	return (s >= '0' && s <= '9');
-}
-
-/**
- * _atoi - converts string to integer
- * @s: the string
- *
- * Return: integer value of string
+ * _atoi - int
+ * @s: pointer
+ * Return: int.
  */
 int _atoi(char *s)
 {
-	int i = 0, neg = 0, d;
-	int num = 0;
+	int i;
+	int res = 0;
+	int sig = -1;
+	int brk = 0;
 
-	while (s[i])
+	for (i = 0; s[i] != '\0'; i++)
 	{
 		if (s[i] == '-')
+			sig = sig * -1;
+		if (s[i] >= '0' && s[i] <= '9')
 		{
-			neg++;
+			res = res * 10;
+			res -= (s[i] - '0');
+			brk = 1;
 		}
-		else if (_isdigit(s[i]))
-		{
-			while (_isdigit(s[i]))
-			{
-				d = (s[i] - '0');
-				d = neg % 2 ? -d : d;
-				num = num * 10 + d;
-				i++;
-			}
+		else if (brk == 1)
 			break;
-		}
-		i++;
 	}
-	return (num);
+	res = sig * res;
+	return (res);
 }

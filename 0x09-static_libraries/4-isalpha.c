@@ -1,11 +1,23 @@
-#include "main.h"
+#include "holberton.h"
 
 /**
-* _isalpha - checks for alphabetical letters
-* @c: a charter to be checke on
-* Return: returns 0 or 1 depending on condition
-*/
+ * _isalpha - check the code for Holberton School students.
+ *
+ * @c: is c an integer argument
+ *
+ * Return: Always 0.
+ */
+
 int _isalpha(int c)
 {
-	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+
+	if (c >= 97 && c <= 122)
+	{
+		return (1);
+	}
+	else if (c >= 65 && c <= 90)
+	{
+		return (1);
+	}
+	return (0);
 }

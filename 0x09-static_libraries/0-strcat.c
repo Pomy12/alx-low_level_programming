@@ -1,26 +1,33 @@
-#include "main.h"
+#include "holberton.h"
 
 /**
- * _strcat - concat 2 string
- * @dest:char
- * @src:char
- * Return:char
+ * *_strcat - function commute srtings
+ * @dest: param pointer to a char
+ * @src: param pointer to a char
+ * Return: return value of dest
  */
+
 char *_strcat(char *dest, char *src)
 {
-	char *s = dest;
+	int i;
+	int j;
 
-	while (*dest != '\0')
+	i = 0;
+	j = 0;
+
+	while (dest[i] != '\0')
 	{
-		dest++;
+		i++;
 	}
 
-	while (*src != '\0')
+	while (src[j] != '\0')
 	{
-		*dest = *src;
-		dest++;
-		src++;
+		dest[i] = src[j];
+		j++;
+		i++;
 	}
-	*dest = '\0';
-	return (s);
+
+	dest[i] = '\0';
+	return (dest);
 }
+

@@ -1,26 +1,23 @@
-#include "main.h"
+#include "holberton.h"
+
 /**
- * _strcmp - compare 2 string
- * @s1:string
- * @s2:strmp
- * Return:int
- * Rebecca
+ * _strcmp - compare
+ * @s1 : pointerto char params
+ * @s2 : pointer to char params
+ * Return: *dest
  */
+
 int _strcmp(char *s1, char *s2)
 {
-	while (((*s1 != '\0') && (*s2 != '\0')) && (*s1 == *s2))
-	{
-		s1++;
-		s2++;
-	}
+	int i;
+	int R;
 
-	if (*s1 == *s2)
-	{
-		return (0);
-	}
+	i = 0;
 
-	else
+	while (s1[i] == s2[i] && (s1[i] != '\0' || s2[i] != '\0'))
 	{
-		return (*s1 - *s2);
+		i++;
 	}
+	R = s1[i] - s2[i];
+	return (R);
 }
