@@ -1,64 +1,51 @@
 #include "variadic_functions.h"
-#include <string.h>
-
 
 /**
- * sep - separates the arguments with ", "
- * @j: is the index of the format indentifier
- * @size: length of the passwed format specifier string
+ * print_all - Prints all of the arguments when specified
+ * @format: specifies the necessary operations
+ * Return: void
  */
-void sep(int j, int size)
-{
-	if (j < (size - 1))
-	{
-		printf(", ");
-	}
-}
 
-/**
- * print_all - prints formated statement
- * @format: cotains the order to be formated
- */
 void print_all(const char * const format, ...)
 {
-	int i = 0, arg2, len = strlen(format);
-	va_list args;
-	char arg1, *arg4;
-	float arg3;
+	int i;
+	int flag;
+	char *str;
+	va_list a_list;
 
-	va_start(args, format);
-	while (format[i])
+	va_start(a_list, format);
+	i = 0;
+	while (format != NULL && format[i] != '\0')
 	{
 		switch (format[i])
 		{
-		case 'c':
-			arg1 = va_arg(args, int);
-			printf("%c", arg1);
-			sep(i, len);
-			break;
-		case 'i':
-			arg2 = va_arg(args, int);
-			printf("%d", arg2);
-			sep(i, len);
-			break;
-		case 'f':
-			arg3 = va_arg(args, double);
-			printf("%f", arg3);
-			sep(i, len);
-			break;
-		case 's':
-			arg4 = va_arg(args, char *);
-			if (arg4 == NULL)
-			{
-				printf("%s", "(nil)");
-				sep(i, len);
+			case 'c':
+				printf("%c", va_arg(a_list, int));
+				flag = 0;
 				break;
-			}
-			printf("%s", arg4);
-			sep(i, len);
-			break;
+			case 'i':
+				printf("%i", va_arg(a_list, int));
+				flag = 0;
+				break;
+			case 'f':
+				printf("%f", va_arg(a_list, double));
+				flag = 0;
+				break;
+			case 's':
+				str = va_arg(a_list, char*);
+				if (str == NULL)
+					str = "(nil)";
+				printf("%s", str);
+				flag = 0;
+				break;
+			default:
+				flag = 1;
+				break;
 		}
-	i++;
+		if (format[i + 1] != '\0' && flag == 0)
+			printf(", ");
+		i++;
 	}
 	printf("\n");
+	va_end(a_list);
 }
