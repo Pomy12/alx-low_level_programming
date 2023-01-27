@@ -1,22 +1,21 @@
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 #include "lists.h"
 
 /**
- * listint_len - returns the lenth of a list;
- * @h: pointer to the head of a list.
- *
- * Return: Length (INT) of a list.
+ * list_len - check the code for Holberton School students.
+ * @h: name of the list
+ * Return: the number of nodes.
  */
-size_t listint_len(const listint_t *h)
+size_t list_len(const list_t *h)
 {
-	size_t n_nodes = 0;
-
-	if (!h)
-		return (0);
+	int count = 0;
 
 	while (h)
 	{
-		n_nodes++;
+		count++;
 		h = h->next;
 	}
-	return (n_nodes);
+	return (count);
 }

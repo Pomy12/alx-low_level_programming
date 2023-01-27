@@ -1,52 +1,54 @@
+#include <stdlib.h>
+#include <string.h>
 #include "lists.h"
 
-
-static listint_t *new_node(const int n);
 /**
- * add_nodeint_end - add a node to the end of a list.
- * @head: pointer of apointer to the head of a list.
- * @n: number value to set the new node to.
+ * _strlen - finds the length of a string
+ * @str: string to find the length of
  *
- * Return: pointer to the head of a list.
+ * Return: length of string
  */
-listint_t *add_nodeint_end(listint_t **head, const int n)
+unsigned int _strlen(char *str)
 {
-	listint_t *new, *temp;
+	unsigned int i;
 
-	if (!(*head))
-	{
-		*head = new_node(n);
-		return (*head);
-	}
-
-	temp = *head;
-	while (temp)
-	{
-		if (!temp->next)
-		{
-			new = new_node(n);
-			temp->next = new;
-			break;
-		}
-		temp = temp->next;
-	}
-	return (*head);
+	for (i = 0; str[i]; i++)
+		;
+	return (i);
 }
 
 /**
- * new_node - creates a new listint_t node.
- * @n: number to place inside the node.
+ * add_node_end - adds a new node to the end of linked list
+ * @head: double pointer to a linked list
+ * @str: string to add to the new node
  *
- * Return: pointer to the new node.
+ * Return: pointer to the new node
  */
-static listint_t *new_node(const int n)
+list_t *add_node_end(list_t **head, const char *str)
 {
-	listint_t *new;
+	list_t *new, *tmp;
 
-	new = malloc(sizeof(listint_t));
-	if (!new)
+	if (str == NULL)
 		return (NULL);
-	new->n = n;
+	new = malloc(sizeof(list_t));
+	if (new == NULL)
+		return (NULL);
+	new->str = strdup(str);
+	if (new->str == NULL)
+	{
+		free(new);
+		return (NULL);
+	}
+	new->len = _strlen(new->str);
 	new->next = NULL;
+	if (*head == NULL)
+	{
+		*head = new;
+		return (new);
+	}
+	tmp = *head;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
 	return (new);
 }

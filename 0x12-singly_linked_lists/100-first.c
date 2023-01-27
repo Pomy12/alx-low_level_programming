@@ -1,50 +1,17 @@
-#include "lists.h"
-#include <stdio.h>
+#include<stdio.h>
 
 /**
- * reverse_listint - reverse a list.
- * @head: pointer of a pointer to a list.
- *
- * Return: pointer to list.
+ * myStartupFun - Apply the constructor attribute to myStartupFun() so that it
+ *   is executed before main()
  */
-listint_t *reverse_listint(listint_t **head)
+void myStartupFun(void) __attribute__ ((constructor));
+
+/**
+ * myStartupFun - implementation of myStartupFun
+ */
+void myStartupFun(void)
 {
-	listint_t *temp, *pre;
-
-	if (!head || !(*head))
-	{
-		return (NULL);
-	}
-
-	if (!(*head)->next)
-	{
-		return (*head);
-	}
-	temp = *head;
-	pre = NULL;
-	while (1)
-	{
-		if (!pre)
-		{
-			pre = *head;
-			temp = temp->next;
-			pre->next = NULL;
-			*head = pre;
-		}
-		else
-		{
-			pre = temp;
-			temp = temp->next;
-			pre->next = *head;
-			if (!temp)
-			{
-				temp = pre;
-				break;
-			}
-			*head = pre;
-		}
-	}
-	*head = temp;
-
-	return (*head);
+	printf("You're beat! and yet, you must allow,\n");
+	printf("I bore my house upon my back!\n");
 }
+

@@ -1,44 +1,42 @@
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 #include "lists.h"
 
-static listint_t *new_node(const int n);
-
 /**
- * add_nodeint - add a node at the head of a list.
- * @head : pointer of a pointer to a list.
- * @n : value to set the new list to.
- *
- * Return: pointer to a pointer of listint_t
+ * _strlen - function that returns the length of a string.
+ * @s : s is a character
+ * Return: value is i
  */
-listint_t *add_nodeint(listint_t **head, const int n)
+int _strlen(const char *s)
 {
-	listint_t *new;
+	int i = 0;
 
-	if (!(*head))
+	while (s[i] != '\0')
 	{
-		*head = new_node(n);
-		return (*head);
+		i++;
 	}
-
-	new = new_node(n);
-	new->next = *head;
-	*head = new;
-	return (*head);
+	return (i);
 }
 
 /**
- * new_node - creates a new listint_t node.
- * @n: number to place inside the node.
- *
- * Return: pointer to the new node.
+ * add_node - add a new node at beginning of a list_t list.
+ * @head: head of a list_t list.
+ * @str: value to insert into element.
+ * Return: the number of nodes.
  */
-static listint_t *new_node(const int n)
+list_t *add_node(list_t **head, const char *str)
 {
-	listint_t *new;
+	list_t *add;
 
-	new = malloc(sizeof(listint_t));
-	if (!new)
+	add = malloc(sizeof(list_t));
+	if (add == NULL)
 		return (NULL);
-	new->n = n;
-	new->next = NULL;
-	return (new);
+	add->str = strdup(str);
+
+	add->len = _strlen(str);
+	add->next = *head;
+	*head = add;
+
+	return (add);
 }
