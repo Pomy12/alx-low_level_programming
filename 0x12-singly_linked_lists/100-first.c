@@ -1,32 +1,50 @@
 #include "lists.h"
+#include <stdio.h>
 
 /**
- * free_listint2 - frees all the node in a list and reset the head to NULL.
- * @head: pointer of pointer to a list.
+ * reverse_listint - reverse a list.
+ * @head: pointer of a pointer to a list.
+ *
+ * Return: pointer to list.
  */
-void free_listint2(listint_t **head)
+listint_t *reverse_listint(listint_t **head)
 {
-	listint_t *temp;
+	listint_t *temp, *pre;
 
-	if (!head)
-		return;
-	if (*head)
+	if (!head || !(*head))
 	{
-		temp = *head;
-		*head = NULL;
-		free_listint(temp);
-		return;
+		return (NULL);
 	}
-}
-/**
- * free_listint - frees all the node in a list.
- * @head: pointer to a list.
- */
-void free_listint(listint_t *head)
-{
-	if (!head)
-		return;
-	free_listint(head->next);
-	free(head);
-}
 
+	if (!(*head)->next)
+	{
+		return (*head);
+	}
+	temp = *head;
+	pre = NULL;
+	while (1)
+	{
+		if (!pre)
+		{
+			pre = *head;
+			temp = temp->next;
+			pre->next = NULL;
+			*head = pre;
+		}
+		else
+		{
+			pre = temp;
+			temp = temp->next;
+			pre->next = *head;
+			if (!temp)
+			{
+				temp = pre;
+				break;
+			}
+			*head = pre;
+		}
+	}
+	*head = temp;
+
+	return (*head);
+}
